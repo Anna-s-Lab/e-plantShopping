@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import CartItem from "./CartItem";
 import { addItem } from "./CartSlice";
 import "./ProductList.css";
@@ -9,6 +9,7 @@ function ProductList() {
   const [showPlants, setShowPlants] = useState(false); // State to control the visibility of the About Us page
   const [addedToCart, setAddedToCart] = useState({});
   const dispatch = useDispatch();
+  const cart = useSelector((state) => state.cart.items);
 
   const plantsArray = [
     {
@@ -337,11 +338,20 @@ function ProductList() {
                     d="M42.3,72H221.7l-26.4,92.4A15.9,15.9,0,0,1,179.9,176H84.1a15.9,15.9,0,0,1-15.4-11.6L32.5,37.8A8,8,0,0,0,24.8,32H8"
                     fill="none"
                     stroke="#faf9f9"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
                     id="mainIconPathAttribute"
                   ></path>
+                  <text
+                    x="50%"
+                    y="50%"
+                    dominant-baseline="middle"
+                    text-anchor="middle"
+                    fill="white"
+                  >
+                    {cart.length}
+                  </text>
                 </svg>
               </h1>
             </a>
@@ -352,7 +362,13 @@ function ProductList() {
         <div className="product-grid">
           {plantsArray.map((category, ci) => (
             <div key={ci}>
-              <h1>
+              <h1
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  margin: "10px 0 0 10px",
+                }}
+              >
                 <div>{category.category}</div>
               </h1>
               <div className="product-list">
@@ -362,13 +378,19 @@ function ProductList() {
                       <img src={plant.image} alt={plant.name} />
                     </div>
                     <div className="product-title">{plant.name}</div>
-                    <div className="product-title">{plant.description}</div>
-                    <div className="product-cost">{plant.cost}</div>
+                    <div className="product-desc">{plant.description}</div>
+                    <div className="product-price">{plant.cost}</div>
                     <button
+                      style={{
+                        backgroundColor: addedToCart[plant.name] ? "grey" : "",
+                      }}
+                      disabled={addedToCart[plant.name]}
                       className="product-button"
                       onClick={() => handleAddToCart(plant)}
                     >
-                      Add to Cart
+                      {addedToCart[plant.name]
+                        ? "Added to cart"
+                        : "Add to Cart"}
                     </button>
                   </div>
                 ))}
