@@ -307,8 +307,10 @@ function ProductList() {
             />
             <a href="/" style={{ textDecoration: "none" }}>
               <div>
-                <h3 style={{ color: "white" }}>Paradise Nursery</h3>
-                <i style={{ color: "white" }}>Where Green Meets Serenity</i>
+                <h3 style={{ color: "white" }}>Paraíso de las Plantas! 🌿🌸</h3>
+                <i style={{ color: "white" }}>
+                  ¡La naturaleza te invita a descubrir su magia!
+                </i>
               </div>
             </a>
           </div>
@@ -317,7 +319,7 @@ function ProductList() {
           <div>
             {" "}
             <a href="#" onClick={(e) => handlePlantsClick(e)} style={styleA}>
-              Plants
+              Plantas
             </a>
           </div>
           <div>
@@ -350,7 +352,7 @@ function ProductList() {
                     text-anchor="middle"
                     fill="white"
                   >
-                    {cart.length}
+                    {cart.reduce((total, item) => total + item.quantity, 0)}
                   </text>
                 </svg>
               </h1>
@@ -401,7 +403,6 @@ function ProductList() {
       ) : (
         <CartItem onContinueShopping={handleContinueShopping} />
       )}
-      <div className="total_cost">Total Cost: </div>
     </div>
   );
 }
