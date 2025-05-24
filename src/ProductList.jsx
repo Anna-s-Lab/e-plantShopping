@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import CartItem from "./CartItem";
 import { addItem } from "./CartSlice";
@@ -348,8 +348,8 @@ function ProductList() {
                   <text
                     x="50%"
                     y="50%"
-                    dominant-baseline="middle"
-                    text-anchor="middle"
+                    dominantBaseline="middle"
+                    textAnchor="middle"
                     fill="white"
                   >
                     {cart.reduce((total, item) => total + item.quantity, 0)}
